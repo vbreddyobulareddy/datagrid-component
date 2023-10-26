@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import HeaderComponent from "./components/header";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:3030/api/voters");
+      return await response.json();
+    };
+    const voters = fetchData();
+    console.log(voters);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HeaderComponent />
+      <div className="flex flex-col justify-start w-screen items-start m-4 p-4">
+        <div>Grid</div>
+        <div>Selected Item</div>
+      </div>
+    </>
   );
 }
 
